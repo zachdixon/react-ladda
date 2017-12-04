@@ -4,7 +4,8 @@
   "description": "React wrapper for Ladda buttons",
   "main": "dist/index.js",
   "scripts": {
-    "watch": "./node_modules/.bin/mocha -w --watch-extensions=jsx test/.setup.js test/**/*-test.jsx",
+    "watch":
+      "./node_modules/.bin/mocha -w --watch-extensions=jsx test/.setup.js test/**/*-test.jsx",
     "test": "./node_modules/.bin/mocha test/.setup.js test/**/*-test.jsx",
     "lint": "./node_modules/.bin/eslint src/**/* test/**/*",
     "build": "npm run lint && ./node_modules/.bin/babel src --out-dir dist",
@@ -14,11 +15,7 @@
     "type": "git",
     "url": "git+https://github.com/jsdir/react-ladda.git"
   },
-  "keywords": [
-    "react",
-    "component",
-    "boilerplate"
-  ],
+  "keywords": ["react", "component", "boilerplate"],
   "author": "Jason Sommer",
   "license": "MIT",
   "bugs": {
@@ -55,7 +52,7 @@
     "react-dom": "^0.14.0 || ^15.0.0"
   },
   "peerDependencies": {
-    "react": "^0.14.0 || ^15.0.0",
-    "react-dom": "^0.14.0 || ^15.0.0"
+    "react": "^0.14.0 || ^16.0.0",
+    "react-dom": "^0.14.0 || ^16.0.0"
   }
 }
