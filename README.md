@@ -6,10 +6,9 @@ react-ladda
 [![NPM version](https://img.shields.io/npm/v/react-ladda.svg?style=flat)](https://www.npmjs.org/package/react-ladda)
 [![Code Climate](https://img.shields.io/codeclimate/github/jsdir/react-ladda.svg?style=flat)](https://codeclimate.com/github/jsdir/react-ladda)
 
-React wrapper for [Ladda buttons](https://github.com/hakimel/Ladda).
+A React wrapper for [Ladda buttons](https://github.com/hakimel/Ladda). [Example](https://github.com/jsdir/react-ladda/blob/master/example/README.md)
 
-Installation
-------------
+## Installation
 
 `react-ladda` can be installed directly through npm:
 
@@ -17,57 +16,107 @@ Installation
 $ npm install --save react-ladda
 ```
 
-Compatibility
--------------
+## Usage
 
-`react-ladda` version | `react` version
---------------------- | ---------------
-`>=3.1.0`             | `0.14.x`
-`>=2.0.2 <3.1.0`      | `0.13.x`
-`<2.0.2`             | `0.12.x`
-
-Usage
------
-
-`LaddaButton` is a React component that wraps [Ladda buttons](https://github.com/hakimel/Ladda) with additional props for the built-in loading indicators:
+`LaddaButton` is a React component that renders a [Ladda button](https://github.com/hakimel/Ladda). You can change the button's loading state and progress using the `loading` and `progress` props.
 
 ```jsx
-React = require('react');
-ReactDOM = require('react-dom');
-LaddaButton = require('react-ladda');
+import React, { Component } from 'react';
 
-App = React.createClass({
-  displayName: 'App',
+import LaddaButton, { XL, SLIDE_UP } from 'react-ladda';
 
-  getInitialState: function() {
-    return {loading: false};
-  },
+class App extends Component {
 
-  toggle: function() {
-    this.setState({loading: !this.state.loading});
-  },
+  state = { loading: false };
 
-  render: function() {
+  toggle() {
+    this.setState({
+      loading: !this.state.loading,
+      progress: 0.5,
+    });
+  }
+
+  render() {
     return (
-      <LaddaButton loading={this.state.loading} progress={.5} onClick={this.toggle}>
-        Click here
+      <LaddaButton
+        loading={this.state.loading}
+        onClick={this.toggle}
+        data-color="#eee"
+        data-size={XL}
+        data-style={SLIDE_UP}
+        data-spinner-size={30}
+        data-spinner-color="#ddd"
+        data-spinner-lines={12}
+      >
+        Click Here!
       </LaddaButton>
     );
   }
-});
+};
 
 ReactDOM.render(<App />, document.body);
 ```
 
-All of the Ladda button options are supported through props:
+Although this package doesn't include the styles for the Ladda buttons, there are many different ways to include them. The easiest way is to add the following tag to your document:
 
-```jsx
-<LaddaButton
-    loading={true}
-    progress={0.5}
-    buttonColor="#eee"
-    buttonSize="xl"
-    buttonStyle="slide-up"
-    spinnerSize={30}
-    spinnerColor="#ddd">Click here</LaddaButton>
+```html
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/Ladda/1.0.0/ladda.min.css">
 ```
+
+## Props
+
+All of the native [Ladda button options](https://github.com/hakimel/Ladda#html) are supported through props:
+
+Prop                 | Type      | Description
+-------------------- | --------- | -----------
+`loading`            | `boolean` | Displays the button's loading indicator
+`progress`           | `number`  | Number from 0.0 to 1.0
+`data-color`         | `string`  | Color applied to the button (eg. `#222`)
+`data-size`          | `string`  | A [button size](#sizes)
+`data-style`         | `string`  | A [button style](#styles)
+`data-spinner-size`  | `number`  | Number representing the size of the spinner in pixels
+`data-spinner-color` | `string`  | Color applied to the spinner (eg. `#eee`)
+`data-spinner-lines` | `number`  | Number of spokes in the spinner
+
+## Sizes and Styles
+
+Ladda comes with a variety of different [sizes and styles](http://lab.hakim.se/ladda/) that you can use. Button sizes and styles can be directly imported from `react-ladda`:
+
+```js
+import LaddaButton, { XS, EXPAND_LEFT } from 'react-ladda'
+```
+
+### Sizes
+
+- `XS`
+- `S`
+- `L`
+- `XL`
+
+### Styles
+
+- `CONTRACT`
+- `CONTRACT_OVERLAY`
+- `EXPAND_LEFT`
+- `EXPAND_RIGHT`
+- `EXPAND_UP`
+- `EXPAND_DOWN`
+- `SLIDE_LEFT`
+- `SLIDE_RIGHT`
+- `SLIDE_UP`
+- `SLIDE_DOWN`
+- `ZOOM_IN`
+- `ZOOM_OUT`
+
+## Development
+
+After cloning and running `npm install`, you can use the following `npm` commands for easier development:
+
+Command         | Description
+--------------- | -----------
+`npm test`      | Runs the test suite
+`npm run watch` | Runs the test suite and reruns when any source or test file changes
+`npm run lint`  | Lints both the source and test files
+`npm run build` | Compiles the source into ES5 and outputs the results into `dist`
+
+_Contributions are more than welcome!_
